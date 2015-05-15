@@ -1,9 +1,10 @@
 <?php
-	class homeLoan{
-		public $interest;
-		public $amount;
-		public $year;
-		public $ratetype;
+	class HomeLoan{
+		private $amount;
+		private $year;
+		private $ratetype;
+		private $interest;
+		
 
 		public function __construct($amount, $year, $ratetype){
 			$this->amount = floatval($amount);
@@ -17,7 +18,7 @@
 		}
 
 		public function getInterest(){
-			echo $this->interest;
+			return $this->interest;
 		}
 
 		public function calculate(){
