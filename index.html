@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Home Loan</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/datatable/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/datatable/jquery.dataTables.css">
+	
+
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function showTable() {
+			var amount = $('#amount').val();
+			var year = $('#year').val();
+			var type = $('#drop option:selected').val();
+
+			$.ajax({
+				url: 'homeloan.php',
+				type: 'POST',
+				data: {
+					amount:amount, 
+					year:year,
+					type:type
+				}
+			}).done(function (data){
+				$('#table').html(data);
+			});
+		}
+	</script>
+
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 2%;">
+	<div class="row">
+		<div class="col-md-4">
+		    <label class="sr-only" for="exampleInputAmount">Amount (in baht)</label>
+		    <div class="input-group">
+		    <div class="input-group-addon">฿</div>
+		    <input type="number" class="form-control" id="amount" placeholder="Amount (in baht)">
+		    <div class="input-group-addon">.00</div>
+		    </div>
+	    </div>
+	    <div class="col-md-4">
+		    <label class="sr-only" for="exampleInputAmount">Loan term (in year)</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">Loan Term</div>
+		      <input type="number" class="form-control" id="year" placeholder="Loan term (in year)">
+		      <div class="input-group-addon">year</div>
+		    </div>
+	  	</div>
+	  	<div class="col-md-1">
+	  	<div class="input-group">
+	  	 	<div class="input-group-addon">Rate type</div>
+	  		<select class="form-control" id="drop" style="width:548%;">
+		    	<option value="Effective">Effective Rate</option>
+		    	<option value="Flat">Flat Rate</option>
+		  	</select>
+		</div>	
+	  	</div>
+	 
+	    <button id="btnSubmit" class="btn btn-primary" style="margin-left:12%;width:11%" onclick="showTable()">Calculate</button>
+	
+
+  	</div>
+	</div>
+</div>
+
+	<div id="table">
+	
+	</div>
+
+</body>
+</html>
+
